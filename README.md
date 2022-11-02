@@ -7,6 +7,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#project-title">Project Title</a></li>
         <li><a href="#team-details">Team Details</a></li>
         <li><a href="#user-requirements">User Requirements</a></li>
         <li><a href="#modules">Modules</a></li>
@@ -17,13 +18,14 @@
   </ol>
 
 
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
  Most incoming Northeastern university freshmen tend to face a common problem of having to make expensive interim accomodation arrangements (hotels/AirBnB) between the date of their arrival, and their lease contract's move-in date.
 
  **'BeMyGuest'** is a full-stack application that intends to provide a marketplace for leasing out rooms on a short-term/temporary basis at an affordable price to incoming university freshmen, from willing university connections who have vacancies at their homes. 
+
+<h3 id = "project-title" style = "margin-top: 10px; margin-bottom: 10px">Project Title : <em>BeMyGuest</em></h2>
 
 ### Team Details
 | Member name                    | Member email                       |
