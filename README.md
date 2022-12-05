@@ -10,7 +10,8 @@
         <li><a href="#project-title">Project Title</a></li>
         <li><a href="#team-details">Team Details</a></li>
         <li><a href="#user-requirements">User Requirements</a></li>
-        <li><a href="#modules">Modules</a></li>
+        <li><a href="#sections">Sections</a></li>
+        <li><a href="#features">Features</a></li>
         <li><a href="#domain-model">Domain Model</a></li>
         <!-- <li><a href="#built-with">Built With</a></li> -->
       </ul>
@@ -46,12 +47,27 @@ The high-level user requirements for the project are as follows:
 
 <p align="right"><a href="#readme-top">(back to top)</a></p>
 
-### Modules
-The project consists of 3 main modules to achieve user requirements:
+### Sections
+The project consists of 3 main sections to achieve user requirements:
 
 * **Authentication** module which consists of the sign-up/login functionalities to authenticate and authorize users of two distinct types - Leasee (buyer of rooms) and Lessor (seller of rooms)
 * **Room Management** module which consists of CRUD functionalities being performed on rooms; the leasee can view/book rooms; and the lessor can add/edit rooms and approve/deny booking requests 
 * **Payment** module which deals with choosing method of payment and processing room payments to complete booking status.
+
+### Features
+The Project utilizes the following APIs, frameworks and tools:
+
+* **React**
+* **Mongoose**
+* **Express**
+* **Node**
+* **Redux**
+* **Material-UI**
+* **Google Maps API**
+* **GeoLocation API**
+* **MailGun Email API**
+* **Stripe Payment API**
+
 
 <p align="right"><a href="#readme-top">(back to top)</a></p>
 
