@@ -9,12 +9,12 @@ export const save = (newRoom) => {
 
 export const search = (query) =>{
    const params = {...query};
-   const populateQuery = [{path: "ownerIds", model: "Lessor"},{path: "bookedLeaseeIds", model: "Leasee"},{path: "approvedLeaseeIds", model: "Leasee"}]
+   const populateQuery = [{path: "ownerId", model: "Lessor"},{path: "bookedLeaseeIds", model: "Leasee"},{path: "approvedLeaseeIds", model: "Leasee"}]
    return Room.find(params).populate(populateQuery);
 }
 
 export const get = (id) =>{
-   const populateQuery = [{path: "ownerIds", model: "Lessor"},{path: "bookedLeaseeIds", model: "Leasee"},{path: "approvedLeaseeIds", model: "Leasee"}]
+   const populateQuery = [{path: "ownerId", model: "Lessor"},{path: "bookedLeaseeIds", model: "Leasee"},{path: "approvedLeaseeIds", model: "Leasee"}]
    const retrievedRoom = Room.findById(id).populate(populateQuery).exec();
    return retrievedRoom;
 }
