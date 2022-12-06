@@ -25,7 +25,6 @@ export const post = async (request,response)=>{
 // controller GET method to fetch all room resources based on filters specified in query parameter
 export const index = async (request,response)=>{
    try{
-      console.log(request.query);
       const NAME = request.query.NAME;
       const DESCRIPTION = request.query.DESCRIPTION;
       const Image = request.query.Image;
@@ -33,6 +32,7 @@ export const index = async (request,response)=>{
       const MaxCapacity = request.query.MaxCapacity;
       const applications = request.query.applications;
       const coordinates = request.query.coordinates;
+      const ownerId = request.query.ownerId;
 
       let query = {};
 
@@ -57,7 +57,10 @@ export const index = async (request,response)=>{
       if(coordinates){
          query = {"features.geometry.coordinates" : coordinates};
       }
-
+      if(ownerId){
+         query = {"ownerId" : ownerId}
+      }
+      console.log("query = ", query)
       const indexedRooms = await roomService.search(query);
       setSuccessResponse(indexedRooms,response);
    }catch(error){
