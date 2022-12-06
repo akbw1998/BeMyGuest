@@ -7,16 +7,8 @@ const leaseeSchema = new mongoose.Schema({
       type:String,
       required: "Name is a required field"
    },
-   // used for auth
-   username:{
-      type:String,
-      required: "Username is a required field"
-   },
-   // used for auth
-   password:{
-      type: String,
-      required: "Password is a required field"
-   },
+   
+   
    // used to render all booked rooms for each leasee in myBookings page
    // But if room has bookedUserIdObjects, booked rooms for any particular user can be queried from all rooms , so no need here
 
