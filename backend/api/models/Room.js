@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 const roomSchema = new mongoose.Schema({
    // will be used to find out owner on Lease click of Book, and should send out email to owner
    // used to query all posted rooms for particular lessor.
-   ownerIds:{
-      type:[mongoose.Types.ObjectId],
+   ownerId:{
+      type: mongoose.Types.ObjectId,
       ref: "Lessor"
    },
    // this will be used on click of Lessor Accept/Reject.Also update room's "applications" field after this event
@@ -29,7 +29,8 @@ const roomSchema = new mongoose.Schema({
          Image : {type : String},
          Cost : {type : String},
          MaxCapacity : {type : Number},
-         applications : {type : Number} // used to check if exceeds maxCapacity, and for rendering. If exceeds max, then remove from grid
+         applications : {type : Number},
+         trailerURL : {type : String} // used to check if exceeds maxCapacity, and for rendering. If exceeds max, then remove from grid
       },
       geometry : {
          coordinates : {type : [Number]}
