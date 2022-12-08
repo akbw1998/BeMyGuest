@@ -30,11 +30,9 @@ const roomSchema = new mongoose.Schema({
          Cost : {type : String},
          MaxCapacity : {type : Number},
          applications : {type : Number},
-         trailerURL : {type : String} // used to check if exceeds maxCapacity, and for rendering. If exceeds max, then remove from grid
+         trailerURL : {type : String},
+         coordinates : {type : [Number]} // used to check if exceeds maxCapacity, and for rendering. If exceeds max, then remove from grid
       },
-      geometry : {
-         coordinates : {type : [Number]}
-      }
    },
    
    // all fields here for rendering details which are not essential on Lessors postings page

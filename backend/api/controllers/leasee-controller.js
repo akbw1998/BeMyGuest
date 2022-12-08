@@ -24,12 +24,27 @@ export const post = async (request,response)=>{
 
 // controller GET method to fetch all leasee resources based on filters specified in query parameter
 export const index = async (request,response)=>{
+   console.log("In Here");
+   
+   let query = {};
    try{
       const name = request.query.name;
-      const query = {};
+      const email = request.query.email;
+      const rejectedRoomIds = request.query.rejectedRoomIds;
+      console.log("rejectedRoomIds = ", rejectedRoomIds)
+      
       if(name){
          query.name = name;
       }
+      if(email){
+         query.email = email
+      }
+      if(rejectedRoomIds){
+         console.log("populating querry ...");
+         query = {rejectedRoomIds : rejectedRoomIds}
+         console.log(" querry = ", query);
+      }
+      console.log("query = ", query)
       const indexedLeasees = await leaseeService.search(query);
       setSuccessResponse(indexedLeasees,response);
    }catch(error){

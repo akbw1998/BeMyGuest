@@ -7,6 +7,14 @@ const leaseeSchema = new mongoose.Schema({
       type:String,
       required: "Name is a required field"
    },
+   email: {
+      type: String,
+      required: "Email is a required field"
+   },
+   rejectedRoomIds : {
+      type : [mongoose.Types.ObjectId],
+      ref: "Room"
+   },
    
    
    // used to render all booked rooms for each leasee in myBookings page
@@ -33,7 +41,7 @@ const leaseeSchema = new mongoose.Schema({
       type: Date,
       default: new Date()
    }
-}, {versionKey: false});
+}, {versionKey: false,strictQuery: false});
 
 
 

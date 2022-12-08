@@ -8,6 +8,8 @@ const APIManagementSlice = createSlice({
       firstSearchComplete: false,
       mapCenterCoords: null, // used to center map based on address on lat & lng selected from autocomplete searchbar
       mousedOverMarkerRoomData: null, // data of room whose marker is moused over in map
+      notification: null,
+      selectedRoomForPayment: null, 
    },
    reducers: {
 
@@ -21,6 +23,18 @@ const APIManagementSlice = createSlice({
 
       setFirstSearchComplete(state,action){
          state.firstSearchComplete = action.payload;
+      },
+
+      setNotification(state,action){
+         state.notification = {
+            message : action.payload.message,
+            type : action.payload.type,
+            open : action.payload.open 
+         }
+      },
+
+      setSelectedRoomForPayment(state, action){
+         state.selectedRoomForPayment = action.payload;
       }
    }
 })

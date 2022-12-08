@@ -1,5 +1,5 @@
 import "./FilterBar.scss";
-import {SearchBar} from "../../pages/Home";
+import {SearchBar} from "../../pages/Home/Home";
 import SelectFilter from "./SelectFilter";
 import { RoomManagementActions } from '../../Store/RoomManagement-slice';
 

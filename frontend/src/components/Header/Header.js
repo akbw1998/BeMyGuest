@@ -2,34 +2,65 @@
 import './Header.scss';
 import Button from '@mui/material/Button';
 import Logo from "./Logo";
+import MyBookings from '../../pages/MyBookings/MyBookings';
 
 /* IMPORTING APIS */
 import {useDispatch, useSelector} from 'react-redux';
 import { UserManagementSliceActions } from '../../Store/UserManagement-slice';
 import {useNavigate} from 'react-router-dom';
-
+import { useAuth0 } from '@auth0/auth0-react';
+import * as FetchAPI from "../../utils/fetch";
+import { isHostComponent } from '@mui/base';
 /* Start of Header Component */
-const Header = () => {
+const Header = ({children}) => {
    /* Initialize states to render appropriate content based on loggedIn status and type of user */
    const isLoggedIn = useSelector(state => state.userManagement.isLoggedIn);
    const currentUser = useSelector(state => state.userManagement.currentUser);
    const isLeasee = useSelector(state => state.userManagement.isLeasee);
+   const inHomePage = useSelector(state => state.userManagement.inHomePage);
    const dispatch = useDispatch();
-  //  const navigate = useNavigate();
-   
-   const handleLogout = async() => {
-      // auth code to logout needs to be added here
-      dispatch(UserManagementSliceActions.setCurrentUser(null)); // after logout, set current to null
-   }
+   const navigate = useNavigate();
+  const { loginWithRedirect,logout,isAuthenticated,user} = useAuth0();
 
-  //  const handleLogin = () =>{
-  //     // redirect to login page for further processing
-  //     navigate('/login');
-  //  }
-  //  const handleSignUp = () => {
-  //     // redirect to sign up page for further processing
-  //     navigate('/signup');
-  //  }
+  const handleLeaseeLogin = async() => {
+    console.log("before dispatch")
+    dispatch(UserManagementSliceActions.setIsLoggedIn(isAuthenticated));
+    dispatch(UserManagementSliceActions.setIsLeasee(true));
+    console.log("after dispatch")
+    const userObjectToBePosted = {};
+    userObjectToBePosted.name = user.name;
+    userObjectToBePosted.email = user.email;
+
+    console.log("userObectToBePosted = ", userObjectToBePosted)
+    const isUserExists = await FetchAPI.getData(`http://localhost:9000/leasees?email=${user.email}`);
+    if(isUserExists.length === 0){
+      const postedUserResponse = await FetchAPI.postData("http://localhost:9000/leasees",userObjectToBePosted);
+      dispatch(UserManagementSliceActions.setCurrentUser(postedUserResponse));
+    }
+    else
+      dispatch(UserManagementSliceActions.setCurrentUser(isUserExists[0]));
+  }
+
+  const handleLessorLogin = async() => {
+    dispatch(UserManagementSliceActions.setIsLoggedIn(isAuthenticated));
+    dispatch(UserManagementSliceActions.setIsLeasee(false));
+    const userObjectToBePosted = {};
+    userObjectToBePosted.name = user.name;
+    userObjectToBePosted.email = user.email;
+    const isUserExists = await FetchAPI.getData(`http://localhost:9000/lessors?email=${user.email}`);
+    if(isUserExists.length === 0){
+      const postedUserResponse = await FetchAPI.postData("http://localhost:9000/lessors",userObjectToBePosted);
+      dispatch(UserManagementSliceActions.setCurrentUser(postedUserResponse));
+    }
+    else
+      dispatch(UserManagementSliceActions.setCurrentUser(isUserExists[0]));
+  }
+  
+   const handleLogout = () => {
+      logout();
+      dispatch(UserManagementSliceActions.setIsLoggedIn(isAuthenticated));
+      dispatch(UserManagementSliceActions.setCurrentUser(null));
+   }
 
    return (
      <div className="header">
@@ -39,36 +70,49 @@ const Header = () => {
        </div>
        <div className="header-middle">
          {currentUser && (
-           <h1 className="salutation-text">{currentUser.name}</h1>
+           <h1 className="salutation-text">{`Welcome ${currentUser.name}`}</h1>
          )}
-         <button onClick = {()=>{dispatch(UserManagementSliceActions.setIsLoggedIn(!isLoggedIn))}}>Toggle Logged in status</button>
-         <button onClick = {()=>{dispatch(UserManagementSliceActions.setIsLeasee(!isLeasee))}}>Toggle Leasee status</button>
+         
 
        </div>
        <div className="header-right">
          <nav className="nav-link-container">
+          {children}
            {isLoggedIn &&
              (isLeasee ? (
-               <Button variant="outlined" color="secondary" size="small">
+               inHomePage && <Button onClick = {()=>{
+                dispatch(UserManagementSliceActions.setInHomePage(false));
+                navigate('/mybookings')
+                }}variant="outlined" color="secondary" size="small">
                  My Bookings
                </Button>
              ) : (
-               <Button variant="outlined" color="secondary" size="small">
+               inHomePage && <Button onClick = {()=>{
+                dispatch(UserManagementSliceActions.setInHomePage(false));
+                navigate('/mypostings')
+                }}variant="outlined" color="secondary" size="small">
                  My Postings
                </Button>
              ))}
          </nav>
          <div className="button-container">
-           {isLoggedIn ? (
-             <Button variant="contained" color="error" size="small" sx ={{m:1}}>
-               Logout
-             </Button>
+           {isAuthenticated ? (
+            <>
+            {!isLoggedIn && (<><Button onClick = {handleLeaseeLogin} variant="contained" color="secondary" size="small" sx ={{m:1}}>
+                 Leasee
+              </Button>
+              <Button onClick = {handleLessorLogin} variant="contained" color="secondary" size="small" sx ={{m:1}}>
+                 Lessor
+              </Button></>)}
+            
+              <Button onClick = {handleLogout} variant="contained" color="error" size="small" sx ={{m:1}}>
+                  Logout
+              </Button>
+            </>
            ) : (
-             <>
-               <Button variant="contained" color="secondary" size="small" sx ={{m:1}}>
+               <Button onClick = {()=>loginWithRedirect()} variant="contained" color="secondary" size="small" sx ={{m:1}}>
                  Login
                </Button>
-             </>
            )}
          </div>
        </div>

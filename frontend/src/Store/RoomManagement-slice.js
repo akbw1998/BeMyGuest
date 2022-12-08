@@ -8,7 +8,7 @@ const RoomManagementSlice = createSlice({
       isFetchPending: true, // flag to signal completion of initial rooms data render
       selectedViewRoomId: null, // room booking modal should pop up with details of selected Room on click from grid
       filterCriteria: '', // price filter state
-      filterOrder: '' // capacity filter state
+      filterOrder: '', // capacity filter state
    },
    reducers: {
 

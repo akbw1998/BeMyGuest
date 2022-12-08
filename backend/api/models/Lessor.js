@@ -7,7 +7,10 @@ const lessorSchema = new mongoose.Schema({
       type:String,
       required: "Name is a required field"
    },
-   
+   email: {
+      type: String,
+      required: "Email is a required field"
+   },
    
    // used to render owned rooms on posting page.
    //  but if room has owner id, all owned rooms for a particular lessor can be queried from all rooms. So no need

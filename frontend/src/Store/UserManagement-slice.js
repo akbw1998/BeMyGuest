@@ -5,7 +5,10 @@ const UserManagementSlice = createSlice({
    initialState: {
       isLoggedIn: false, // flag used to render logout button, myBookings, myPostings conditionally
       isLeasee: false, // flag used to allow(for leasee only) book button action(for leasee only), render myBookings and not myPostings (leasee only) 
-      currentUser: null // used to get current user object to use details when booking, contacting etc
+      currentUser: null, // used to get current user object to use details when booking, contacting etc
+      notification: null,
+      rejectedLeaseeIds: [],
+      inHomePage: true
    },
    reducers: {
       setIsLoggedIn(state,action){
@@ -19,6 +22,12 @@ const UserManagementSlice = createSlice({
       setCurrentUser(state,action){ // function to set current User
          state.currentUser = action.payload;
       },
+      setInHomePage(state,action){
+         state.inHomePage = action.payload;
+      },
+      setRejectedLeaseeIds(state,action){
+         state.rejectedLeaseeIds = action.payload;
+      }
    }
 })
 

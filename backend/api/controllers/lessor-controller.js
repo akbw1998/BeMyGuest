@@ -30,9 +30,13 @@ export const post = async (request,response)=>{
 export const index = async (request,response)=>{
    try{
       const name = request.query.name;
+      const email = request.query.email;
       const query = {};
       if(name){
          query.name = name;
+      }
+      if(email){
+         query.email = email
       }
       const indexedLessors = await lessorService.search(query);
       setSuccessResponse(indexedLessors,response);

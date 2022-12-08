@@ -17,7 +17,7 @@
    position: relative;
    z-index: 200;
    width: max(500px,40vw);
-   overflow-y: scroll;
+   // overflow-y: scroll;
    background-color: white;
    box-shadow: 0 0 2px 1px rgba(0,0,0,0.4);
    border-radius: 2px;
@@ -72,6 +72,7 @@
 }
 .room-img{
    float:left;
+   width: 300px;
 }
 .modal-view-room-desc{
    font-size: 19px;

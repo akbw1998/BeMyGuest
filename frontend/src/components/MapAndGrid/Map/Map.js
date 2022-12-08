@@ -44,8 +44,8 @@ export const Map = () => {
            }}
            onClick = {() => dispatch(RoomManagementActions.setSelectedViewRoomId(data.id))} // on click of map icon, setSelectedViewRoomId
            position={{
-             lat: data.features.geometry.coordinates[0],
-             lng: data.features.geometry.coordinates[1],
+             lat: data.features.properties.coordinates[0],
+             lng: data.features.properties.coordinates[1],
            }}
          />
        ))}
@@ -54,8 +54,8 @@ export const Map = () => {
          <InfoWindow
            key={icon.id}
            position={{
-             lat: icon.features.geometry.coordinates[0] + 0.05,
-             lng: icon.features.geometry.coordinates[1] + 0.05,
+             lat: icon.features.properties.coordinates[0] + 0.05,
+             lng: icon.features.properties.coordinates[1] + 0.05,
            }}
            onCloseClick={() => setIcon(null)}
          >

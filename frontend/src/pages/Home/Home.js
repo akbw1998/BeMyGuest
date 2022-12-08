@@ -1,16 +1,16 @@
 /* IMPORTING Components and styles */
 import './Home.scss';
-import '../components/SearchBar/SearchBar.scss';
-import SearchCard from '../components/SearchCard/SearchCard';
-import '../components/SearchCard/SearchCard.scss';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
-import MapAndGrid from '../components/MapAndGrid/MapAndGrid';
-import '../components/MapAndGrid/MapAndGrid.scss';
-import { Map } from '../components/MapAndGrid/Map/Map';
-import Grid from '../components/MapAndGrid/Grid/Grid';
-import FilterBar from '../components/FilterBar/FilterBar';
-import RoomViewModal from '../components/RoomViewModal/RoomViewModal';
+import '../../components/SearchBar/SearchBar.scss';
+import SearchCard from '../../components/SearchCard/SearchCard';
+import '../../components/SearchCard/SearchCard.scss';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import MapAndGrid from '../../components/MapAndGrid/MapAndGrid';
+import '../../components/MapAndGrid/MapAndGrid.scss';
+import { Map } from '../../components/MapAndGrid/Map/Map';
+import Grid from '../../components/MapAndGrid/Grid/Grid';
+import FilterBar from '../../components/FilterBar/FilterBar';
+import RoomViewModal from '../../components/RoomViewModal/RoomViewModal';
 import {
    Combobox,
    ComboboxInput,
@@ -21,10 +21,10 @@ import {
  import "@reach/combobox/styles.css";
  
  /* IMPORTING APIS  */ 
-import LoadMapScripts from '../utils/LoadMapScripts';
+import LoadMapScripts from '../../utils/LoadMapScripts';
 import usePlacesAutoComplete, {getGeocode, getLatLng} from 'use-places-autocomplete';
 import { useDispatch, useSelector } from 'react-redux';
-import { APIManagementActions } from '../Store/APIManagement-slice';
+import { APIManagementActions } from '../../Store/APIManagement-slice';
 // Declaring libraries globally to prevent re-render of mapScripts on every render of App
 const libraries = ['places'];
 
@@ -74,10 +74,14 @@ export const SearchBar = () => {
    } = usePlacesAutoComplete();
 
    const handleChange = async(address) => {
+        console.log("")
+        console.log("Address on select of search bar = ", address);
          setValue(address, false);
          clearSuggestions();
          const results = await getGeocode({address});
+         console.log("results = ",results);
          const {lat,lng} = await getLatLng(results[0]);
+         console.log("lat =", lng, "lng = ", lng);
          dispatch(APIManagementActions.setMapCenterCoords({lat,lng}));
          dispatch(APIManagementActions.setFirstSearchComplete(true));
    }

@@ -33,6 +33,7 @@ export const index = async (request,response)=>{
       const applications = request.query.applications;
       const coordinates = request.query.coordinates;
       const ownerId = request.query.ownerId;
+      const bookedLeaseeIds = request.query.bookedLeaseeIds;
 
       let query = {};
 
@@ -59,6 +60,9 @@ export const index = async (request,response)=>{
       }
       if(ownerId){
          query = {"ownerId" : ownerId}
+      }
+      if(bookedLeaseeIds){
+         query = {"bookedLeaseeIds" : bookedLeaseeIds}
       }
       console.log("query = ", query)
       const indexedRooms = await roomService.search(query);

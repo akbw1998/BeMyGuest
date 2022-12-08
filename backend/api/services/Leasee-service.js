@@ -9,11 +9,12 @@ export const save = (newLeasee) => {
 
 export const search = (query) =>{
    const params = {...query};
-   return Leasee.find(params)
+   return Leasee.find(params).populate({path: "rejectedRoomIds", model: "Room"});
 }
 
 export const get = (id) =>{
-   const retrievedLeasee = Leasee.findById(id).exec();
+
+   const retrievedLeasee = Leasee.findById(id).populate({path: "rejectedRoomIds", model: "Room"}).exec();
    return retrievedLeasee;
 }
 
