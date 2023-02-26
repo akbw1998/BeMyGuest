@@ -34,35 +34,35 @@ export const index = async (request,response)=>{
       const coordinates = request.query.coordinates;
       const ownerId = request.query.ownerId;
       const bookedLeaseeIds = request.query.bookedLeaseeIds;
-
+      
       let query = {};
 
       if(NAME){
-         query = {"features.properties.NAME" : NAME}
+         query["features.properties.NAME"] = NAME;
       }
       if(DESCRIPTION){
-         query = {"features.properties.DESCRIPTION" : DESCRIPTION}
+         query["features.properties.DESCRIPTION"] =  DESCRIPTION;
       }
       if(Image){
-         query = {"features.properties.Image" : Image}
+         query["features.properties.Image"] = Image;
       }
       if(Cost){
-         query = {"features.properties.Cost" : Cost};
+         query["features.properties.Cost"] = Cost;
       }
       if(MaxCapacity){
-         query = {"features.properties.MaxCapacity" : MaxCapacity};
+         query["features.properties.MaxCapacity"] = MaxCapacity;
       }
       if(applications){
-         query = {"features.properties.applications" : applications};
+         query["features.properties.applications"] = applications;
       }
       if(coordinates){
-         query = {"features.geometry.coordinates" : coordinates};
+         query["features.geometry.coordinates"] = coordinates;
       }
       if(ownerId){
-         query = {"ownerId" : ownerId}
+         query["ownerId"] = ownerId;
       }
       if(bookedLeaseeIds){
-         query = {"bookedLeaseeIds" : bookedLeaseeIds}
+         query["bookedLeaseeIds"] =  bookedLeaseeIds;
       }
       console.log("query = ", query)
       const indexedRooms = await roomService.search(query);

@@ -75,7 +75,8 @@ The Project utilizes the following APIs, frameworks and tools:
 
 <img width="100%" alt="image" src="./images/domain-model.png">
 
-
 ### Snapshots of Project
 
-<img width="100%" alt="image" src="./images/domain-model.png">
+<img width="100%" alt="image" src="./images/HomePage.png" style = 'margin: 1em 0'>
+<img width="100%" alt="image" src="./images/HomePageAfterSearch.png" style = 'margin: 1em 0'>
+<img width="100%" alt="image" src="./images/viewDetailRoom.png" style = 'margin: 1em 0'>

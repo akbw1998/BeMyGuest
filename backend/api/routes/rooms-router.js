@@ -13,4 +13,5 @@ router.route('/rooms/:id')
       .delete(roomsController.remove)
       .get(roomsController.get)
 
+
 export default router; // export rooms router
